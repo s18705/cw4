@@ -39,6 +39,7 @@ namespace APBDcw4.Controllers
                 while (dr.Read())
                 {
                     var st = new Student();
+                    st.IdStudent = int.Parse(dr["IdStudent"].ToString());
                     st.IndexNumber = dr["IndexNumber"].ToString();
                     st.FirstName = dr["FirstName"].ToString();
                     st.LastName = dr["LastName"].ToString();
