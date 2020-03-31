@@ -11,5 +11,6 @@ namespace APBDcw4.Services
         //Data Acces Layer
 
         public IEnumerable<Student> GetStudents();
+        public Enrollment GetEnrollment(string idStudenta);
     }
 }

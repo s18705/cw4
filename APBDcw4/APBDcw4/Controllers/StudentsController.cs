@@ -14,15 +14,15 @@ namespace APBDcw4.Controllers
     public class StudentsController : ControllerBase
     {
 
-        private IStudentsDal _dbService;
+        private readonly IStudentsDal _dbService;
 
-       // public StudentsController(IStudentsDal dbService)
-       // {
-       //     _dbService = dbService;
-       // }
+        //public StudentsController(IStudentsDal dbService)
+        //{
+        ///    _dbService = dbService;
+        //}
 
 
-        [HttpGet]
+        [HttpGet("id")]
         public IActionResult GetStudents()//[FromServices] IStudentsDal dbService)
         {
             var list = new List<Student>();
@@ -42,16 +42,46 @@ namespace APBDcw4.Controllers
                     st.IndexNumber = dr["IndexNumber"].ToString();
                     st.FirstName = dr["FirstName"].ToString();
                     st.LastName = dr["LastName"].ToString();
+                    st.BirthDate = dr["BirthDate"].ToString();
+                    st.IdEnrollment = dr["IdEnrillment"].ToString();
                     list.Add(st);
-
                 }
-
-
             }
+             return Ok(list);
+        }
 
 
+        public IActionResult GetEnrollment(string idStudenta)
+        {
+            var list = new List<Enrollment>();
+
+            using (SqlConnection con = new SqlConnection("Data Source=db-mssql;Initial Catalog=s18705;Integrated Security=True"))
+            using (SqlCommand com = new SqlCommand())
+            {
+                com.Connection = con;
+                com.CommandText = "select * from Enrollment where IdEnrollment = (select IdEnrollment from Student where Student.IndexNumber='@index')";
+
+                SqlParameter par = new SqlParameter();
+                par.Value = idStudenta;
+                par.ParameterName = "index";
+                com.Parameters.Add(par);
+
+                con.Open();
+                SqlDataReader dr = com.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var en = new Enrollment();
+                    en.IdEnrollment = int.Parse(dr["IndexNumber"].ToString());
+                    en.Semester = int.Parse(dr["Semesrt"].ToString());
+                    en.StartDate = dr["StartDate"].ToString();
+                    en.IdStudy = int.Parse(dr["IdStudy"].ToString());
+                    list.Add(en);
+                }
+            }
             return Ok(list);
         }
+
 
         /*
         [HttpGet("{indexNumber}")]
@@ -104,7 +134,24 @@ namespace APBDcw4.Controllers
 
                 com.Parameters.AddWithValue("Lastname", "Kowalksi");
                 var dr = com.ExecuteReader();
-                //...
+                
+
+                  if (dr.Read())
+                    {
+                        var st = new Student();
+
+                    
+                         //if(dr["IndexNumber"] == DBNull.Value)
+                        //{
+
+                        //}
+                    
+
+                        st.IndexNumber = dr["IndexNumber"].ToString();
+                        st.FirstName = dr["FirstName"].ToString();
+                        st.LastName = dr["LastName"].ToString();
+                        return Ok(st);
+                    }
 
 
             }

@@ -14,5 +14,9 @@ namespace APBDcw4.Models
         public string LastName { get; set; }
 
         public string IndexNumber { get; set; }
+
+        public string BirthDate { get; set; }
+
+        public string IdEnrollment { get; set; }
     }
 }
