@@ -44,7 +44,7 @@ namespace APBDcw4.Controllers
                     st.FirstName = dr["FirstName"].ToString();
                     st.LastName = dr["LastName"].ToString();
                     st.BirthDate = dr["BirthDate"].ToString();
-                    st.IdEnrollment = int.Parse(dr["IdEnrillment"].ToString());
+                    st.IdEnrollment = int.Parse(dr["IdEnrollment"].ToString());
                     list.Add(st);
                 }
             }

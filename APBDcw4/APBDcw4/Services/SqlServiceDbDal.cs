@@ -56,11 +56,12 @@ namespace APBDcw4.Services
                 while (dr.Read())
                 {
                     var st = new Student();
+                    st.IdStudent = int.Parse(dr["IdStudent"].ToString());
                     st.IndexNumber = dr["IndexNumber"].ToString();
                     st.FirstName = dr["FirstName"].ToString();
                     st.LastName = dr["LastName"].ToString();
                     st.BirthDate = dr["BirthDate"].ToString();
-                    st.IdEnrollment = dr["IdEnrillment"].ToString();
+                    st.IdEnrollment = int.Parse(dr["IdEnrollment"].ToString());
                     list.Add(st);
                 }
             }
