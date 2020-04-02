@@ -73,7 +73,7 @@ namespace APBDcw4.Controllers
                 while (dr.Read())
                 {
                     var en = new Enrollment();
-                    en.IdEnrollment = int.Parse(dr["IndexNumber"].ToString());
+                    en.IdEnrollment = int.Parse(dr["IdEnrollment"].ToString());
                     en.Semester = int.Parse(dr["Semesrt"].ToString());
                     en.StartDate = dr["StartDate"].ToString();
                     en.IdStudy = int.Parse(dr["IdStudy"].ToString());
